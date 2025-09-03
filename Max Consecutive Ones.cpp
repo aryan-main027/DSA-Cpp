@@ -27,7 +27,8 @@ public:
 
 // vector<int> nums = {1, 0, 1, 1, 0, 1};
 
-// for (int num : nums) {
+// for (int i = 0 ; i<n ; i++) {
+//     int num = nums[i];
 //     cout << num << " ";
 // }
 // Above both loop are same 
