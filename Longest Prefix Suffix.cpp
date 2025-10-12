@@ -30,3 +30,6 @@ public:
     return lps[s.size() - 1];
   }
 };
+
+// KMP algorithm is used in this dsa question
+
