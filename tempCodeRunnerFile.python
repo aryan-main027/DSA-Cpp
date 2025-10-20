@@ -1,0 +1,27 @@
+import tkinter as tk
+from tkinter import messagebox
+import os
+import platform
+import subprocess
+
+root = tk.Tk()
+root.title("System Control")
+root.geometry("200x150")
+root.configure(bg="#f0f0f0")
+
+def execute_command(action, win_cmd, linux_cmd):
+    if messagebox.askyesno(f"Confirm {action}", f"Are you sure you want to {action.lower()}?"):
+        try:
+            if platform.system() == "Windows":
+                os.system(win_cmd)
+            else:  # Linux
+                subprocess.run(linux_cmd, check=True)
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to {action.lower()}: {str(e)}")
+
+# Buttons
+tk.Button(root, text="Shutdown", command=lambda: execute_command("Shutdown", "shutdown /s /t 0", ["shutdown", "-h", "now"]), bg="red", fg="white", width=10).pack(pady=5)
+tk.Button(root, text="Restart", command=lambda: execute_command("Restart", "shutdown /r /t 0", ["reboot"]), bg="yellow", width=10).pack(pady=5)
+tk.Button(root, text="Log Off", command=lambda: execute_command("Log Off", "shutdown /l", ["loginctl", "terminate-user", os.getlogin()]), bg="blue", fg="white", width=10).pack(pady=5)
+
+root.mainloop()
